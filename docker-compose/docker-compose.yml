@@ -12,5 +12,5 @@ services: # 띄울 컨테이너 서비스들을 모아서 설정하는 곳
                 environment:
                         - MYSQL_ROOT_PASSWORD=${MYSQL_PW}
                 volumes: # 컨테이너를 정지하고 삭제하면 컨테이너의 내용은 사라진다. DB 보존을 위해 호스트 경로로 저장.
-                        - /mnt/c/Users/zero/Desktop/inception/inception/con_volumes/mariadb/data:/var/lib/mysql
-                        - /mnt/c/Users/zero/Desktop/inception/inception/con_volumes/mariadb/conf.d:/etc/mysql/conf.d
+                        - ${MYSQL_DATA_PATH}:/var/lib/mysql
+                        - ${MYSQL_CONFIG_PATH}:/etc/mysql/conf.d
