@@ -40,6 +40,7 @@ services: # 띄울 컨테이너 서비스들을 모아서 설정하는 곳
                         - 80:80
                 volumes:
                         - ${WP_WWW_PATH}:/var/www/html
+                        - ${NGINX_VHOSTS}:/etc/nginx/conf.d/vhosts.conf
                 networks:
                         - ${MY_NETWORK}
 
