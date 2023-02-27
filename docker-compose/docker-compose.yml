@@ -1,0 +1,16 @@
+version: '2.1' # 자신의 버전 입력
+services: # 띄울 컨테이너 서비스들을 모아서 설정하는 곳
+        mariadb: # 띄울 서비스
+                image: mariadb:10.2.10 # 컨테이너 만들 이미지 지정
+                container_name: mydb # 식별하기 위해 필요한 컨테이너 이름
+                restart: always # 재시작 옵션을 always로 하겠다는 것은 컨테이너 종료 상태와 상관없이 항상 재시작하는 것
+                # environment: - MYSQL_ROOT_PASSWORD=mypassword
+                           # MYSQL_ROOT_PASSWORD 는 환경변수이다. git에 올릴경우 비밀번호가 노출이 될 수 있으므로
+                           # 위와 같이 compose.yml 파일에 직접 입력해서는 안 되고, 반드시 환경변수로 설정해 주어야 한다.
+                           # compose는 기본으로 .env 파일을 환경변수 파일로 인식한다. 필요한 변수를
+                           # .env에 설정해주고 .gitignore에 추가하여 저장소에 들어가지 않게 해 주어야 한다.
+                environment:
+                        - MYSQL_ROOT_PASSWORD=${MYSQL_PW}
+                volumes: # 컨테이너를 정지하고 삭제하면 컨테이너의 내용은 사라진다. DB 보존을 위해 호스트 경로로 저장.
+                        - /mnt/c/Users/zero/Desktop/inception/inception/con_volumes/mariadb/data:/var/lib/mysql
+                        - /mnt/c/Users/zero/Desktop/inception/inception/con_volumes/mariadb/conf.d:/etc/mysql/conf.d
